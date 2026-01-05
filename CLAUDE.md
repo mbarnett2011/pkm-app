@@ -15,7 +15,9 @@ SwiftUI menu bar app for Personal Knowledge Management.
 - **PKM Vault**: `~/Workspace/Projects/PKM/`
 - **Claude CLI**: `/opt/homebrew/bin/claude`
 - **Scripts**: `Sources/PKMApp/Resources/Scripts/`
+- **GitHub Repo**: https://github.com/mbarnett2011/pkm-app
 - **Plan**: `~/.claude/plans/keen-weaving-sloth.md`
+- **Integration Plan**: `~/.claude/plans/cryptic-roaming-stearns.md`
 
 ## Build Commands
 
@@ -50,6 +52,22 @@ swift package generate-xcodeproj
 **Swift Packages:**
 - [Yams](https://github.com/jpsim/Yams) - YAML frontmatter parsing
 - [swift-markdown](https://github.com/apple/swift-markdown) - Markdown parsing/rendering
+
+## PKM Ecosystem Integration
+
+pkm-app integrates with two other components:
+
+1. **Assistant Hub** (`~/Workspace/Projects/assistant-hub/`)
+   - Python app that generates daily briefings (calendar + email + AI summary)
+   - Runs on DigitalOcean droplet via cron (6 AM UTC daily)
+   - Appends briefings to PKM Vault daily notes (## Daily Briefing section)
+   - pkm-app will display these briefings in Phase 3
+
+2. **PKM Vault** (`~/Workspace/Projects/PKM/`)
+   - Markdown files with YAML frontmatter
+   - Daily Notes/, Goals/, Projects/ directories
+   - Single source of truth for all PKM data
+   - pkm-app reads (and in future, writes) to this vault
 
 ## Development Workflow
 
@@ -95,11 +113,18 @@ func updateFrontmatter(url: URL, updates: [String: Any]) throws {
 - Menu bar infrastructure
 - Basic SwiftUI views
 
-**Next: Phase 2 - Data Models**
-- Create Swift models matching PKM markdown schema
-- Implement FileService for markdown I/O
-- Build FrontmatterParser for YAML handling
-- Create TemplateService for note creation
+**Phase 3: GitHub Repository Setup** ✅ (Jan 4, 2026)
+- GitHub repo created: mbarnett2011/pkm-app
+- Documentation added: DEVELOPMENT.md, ROADMAP.md, README.md
+- Templates: .github/ISSUE_TEMPLATE.md, PULL_REQUEST_TEMPLATE.md
+- All documentation committed and pushed
+
+**Next: Phase 2 - Data Models & File Operations**
+- Create Swift models matching PKM markdown schema (DailyNote, Goal, Project)
+- Implement FileService actor for thread-safe markdown I/O
+- Build FrontmatterParser for YAML handling with Yams
+- Create TemplateService for note creation from templates
+- Comprehensive test coverage for all services
 
 ## Testing
 
