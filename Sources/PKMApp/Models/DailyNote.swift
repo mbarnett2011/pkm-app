@@ -185,13 +185,15 @@ extension DailyNote {
 
     /// Get the date from frontmatter, if available
     var frontmatterDate: Date? {
-        guard let dateString = frontmatter["date"] as? String else {
-            return nil
+        // Yams can parse dates as Date objects or strings
+        if let date = frontmatter["date"] as? Date {
+            return date
+        } else if let dateString = frontmatter["date"] as? String {
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withFullDate]
+            return formatter.date(from: dateString)
         }
-
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withFullDate]
-        return formatter.date(from: dateString)
+        return nil
     }
 
     /// Get the note type from frontmatter
