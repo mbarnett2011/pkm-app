@@ -113,18 +113,26 @@ func updateFrontmatter(url: URL, updates: [String: Any]) throws {
 - Menu bar infrastructure
 - Basic SwiftUI views
 
+**Phase 2: Data Models & File Operations** ✅ (Jan 4, 2026)
+- ✅ FrontmatterParser.swift - YAML parsing with Yams (13 tests)
+- ✅ DailyNote.swift model - Sections, append-only updates
+- ✅ FileService.swift actor - Thread-safe file I/O (17 tests)
+- ✅ Integration tests with real PKM vault (5 tests)
+- ✅ All 35 tests passing
+- ✅ Verified with real vault (reads Assistant Hub briefings)
+- 🚧 Goal.swift and Project.swift models (optional for Phase 3)
+
 **Phase 3: GitHub Repository Setup** ✅ (Jan 4, 2026)
 - GitHub repo created: mbarnett2011/pkm-app
 - Documentation added: DEVELOPMENT.md, ROADMAP.md, README.md
 - Templates: .github/ISSUE_TEMPLATE.md, PULL_REQUEST_TEMPLATE.md
 - All documentation committed and pushed
 
-**Next: Phase 2 - Data Models & File Operations**
-- Create Swift models matching PKM markdown schema (DailyNote, Goal, Project)
-- Implement FileService actor for thread-safe markdown I/O
-- Build FrontmatterParser for YAML handling with Yams
-- Create TemplateService for note creation from templates
-- Comprehensive test coverage for all services
+**Next: Phase 3 - Assistant Hub Integration**
+- Create view models for daily briefing display
+- Build SwiftUI views to show briefings in menu bar
+- Refresh daily note on demand
+- Settings for vault path configuration
 
 ## Testing
 
